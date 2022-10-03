@@ -28,7 +28,7 @@ public class PrimeGame {
     private static boolean isPrime(int candidate) {
 
         if (candidate == 1) {
-            return true;
+            return false;
         }
         int divsorsCount = 0;
         for (int i = 1; i <= candidate; i++) {
