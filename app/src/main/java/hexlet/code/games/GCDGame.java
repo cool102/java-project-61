@@ -17,7 +17,7 @@ public class GCDGame {
         val2 = RANDOMIZER.nextInt(VALUES_BOUND) + 1;
         System.out.printf("Question: %s %s\n", val1, val2);
         int correctResult = getGCD(val1, val2);
-        System.out.println("Your answer: ");
+        System.out.print("Your answer: ");
         String userAnswer = SC.nextLine();
         boolean correctAnswer = Integer.parseInt(userAnswer) == correctResult;
         int counter = 0;

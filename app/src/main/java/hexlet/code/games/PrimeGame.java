@@ -10,7 +10,7 @@ public class PrimeGame {
     public static int play(String gamerName) {
         int random = new Random().nextInt(BOUND) + 1;
         System.out.println("Question: " + random);
-        System.out.println("Your answer: ");
+        System.out.print("Your answer: ");
 
         boolean isPrime = isPrime(random);
         String userAnswer = SC.nextLine();

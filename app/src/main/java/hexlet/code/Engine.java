@@ -65,8 +65,9 @@ public class Engine {
     }
 
     public static String askName() {
+        System.out.println();
         System.out.println("Welcome to the Brain Games!");
-        System.out.print("May I have your name?");
+        System.out.print("May I have your name? ");
         Scanner sc = new Scanner(System.in);
         String name = sc.nextLine();
         System.out.print("Hello, " + name + "!\n");

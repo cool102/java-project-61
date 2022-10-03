@@ -16,7 +16,7 @@ public class ProgressionGame {
 
     public static int play(String gamerName) {
         System.out.println("Question: " + generateProgression());
-        System.out.println("Your answer: ");
+        System.out.print("Your answer: ");
         String userAnswer = SC.nextLine();
         boolean correctAnswer = userAnswer.equals(correctResult);
         int counter = 0;

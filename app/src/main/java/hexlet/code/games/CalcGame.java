@@ -24,7 +24,7 @@ public class CalcGame {
         expression = String.format("%s %s %s", val1, operation, val2);
         System.out.println("Question: " + expression);
         int correctResult = getOperationResult(operation);
-        System.out.println("Your answer: ");
+        System.out.print("Your answer: ");
         String userAnswer = SC.nextLine();
         boolean correctAnswer = Integer.parseInt(userAnswer) == correctResult;
         int counter = 0;
