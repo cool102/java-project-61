@@ -12,7 +12,6 @@ public class EvenGame {
         int random = new Random().nextInt(BOUND) + 1;
         System.out.println("Question: " + random);
         System.out.println("Your answer: ");
-
         boolean randomIsEven = (random % 2 == 0);
         String userAnswer = SC.nextLine();
         String correctAnswer = randomIsEven ? "yes" : "no";
