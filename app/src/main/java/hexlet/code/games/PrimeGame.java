@@ -15,11 +15,9 @@ public class PrimeGame {
         boolean isPrime = isPrime(random);
         String userAnswer = SC.nextLine();
         String correctAnswer = isPrime ? "yes" : "no";
-        int counter = 0;
         if (correctAnswer.equalsIgnoreCase(userAnswer)) {
             System.out.println("Correct!");
-            counter++;
-            return counter;
+            return 1;
         } else {
             System.out.printf("'%s' is wrong answer ;(. Correct answer was '%s'.\n"
                     + "Let's try again, %s!\n", userAnswer, correctAnswer, gamerName);

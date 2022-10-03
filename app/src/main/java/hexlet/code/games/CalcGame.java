@@ -27,12 +27,11 @@ public class CalcGame {
         System.out.print("Your answer: ");
         String userAnswer = SC.nextLine();
         boolean correctAnswer = Integer.parseInt(userAnswer) == correctResult;
-        int counter = 0;
+
 
         if (correctAnswer) {
             System.out.println("Correct!");
-            counter++;
-            return counter;
+            return 1;
 
         } else {
             System.out.printf("'%s' is wrong answer ;(. Correct answer was '%s'.\n"

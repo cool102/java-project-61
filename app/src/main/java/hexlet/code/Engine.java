@@ -12,14 +12,23 @@ public class Engine {
     private static final int GAME_STOP_ANSWERS = 3;
     private static String gamerName = "";
     private static int rightAnswers = 0;
+    private static boolean isGameOver = false;
+
 
     public static void start(String choice) {
         gamerName = askName();
         printQuestion(choice);
         do {
-            rightAnswers = rightAnswers + play(choice, gamerName);
-        } while (rightAnswers != GAME_STOP_ANSWERS);
-        System.out.printf("Congratulations, %s!\n", gamerName);
+            int result = play(choice, gamerName);
+            isGameOver = result == 0;
+            if (!isGameOver) {
+                rightAnswers++;
+            }
+        } while (!isGameOver && rightAnswers != GAME_STOP_ANSWERS);
+        if (rightAnswers == GAME_STOP_ANSWERS) {
+            System.out.printf("Congratulations, %s!\n", gamerName);
+        }
+
     }
 
     public static int play(String choice, String name) {
