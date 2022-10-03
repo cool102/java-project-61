@@ -15,8 +15,8 @@ class Cli {
         System.out.println("6 - Prime");
         System.out.println("0 - Exit");
         Scanner sc = new Scanner(System.in);
+        System.out.print("Your choice: ");
         String choice = sc.nextLine();
-        System.out.println("Your choice: " + choice);
         return choice;
     }
 }

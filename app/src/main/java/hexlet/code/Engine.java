@@ -69,7 +69,7 @@ public class Engine {
         System.out.print("May I have your name?");
         Scanner sc = new Scanner(System.in);
         String name = sc.nextLine();
-        System.out.print("Hello, " + name + "!");
+        System.out.print("Hello, " + name + "!\n");
         return name;
     }
 
