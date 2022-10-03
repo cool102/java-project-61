@@ -41,6 +41,9 @@ public class Engine {
 
     public static void printQuestion(String gameNumber) {
         switch (gameNumber) {
+            case "0":
+            case "1":
+                System.exit(0);
             case "2":
                 System.out.println("Answer 'yes' if the number is even, otherwise answer 'no'.");
                 break;
