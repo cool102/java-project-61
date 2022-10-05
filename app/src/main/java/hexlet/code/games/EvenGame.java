@@ -5,7 +5,7 @@ import hexlet.code.Engine;
 import java.util.Random;
 
 public class EvenGame {
-    private static String description = "Answer 'yes' if number even otherwise answer 'no'.";
+    private static String description = "Answer 'yes' if the number is even, otherwise answer 'no'.";
 
     public static void run() {
         final int bound = 20;
