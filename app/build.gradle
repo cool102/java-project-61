@@ -12,9 +12,9 @@ compileJava {
 run {
     standardInput = System.in
 }
-        application {
-            mainClass = 'hexlet.code.App'
-        }
+application {
+    mainClass = 'hexlet.code.App'
+}
 
 group 'hexlet.code'
 version '1.0-SNAPSHOT'
@@ -26,7 +26,6 @@ repositories {
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.0'
-    // https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
     implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.9'
 
 }

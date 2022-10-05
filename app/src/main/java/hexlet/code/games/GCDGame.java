@@ -1,36 +1,32 @@
 package hexlet.code.games;
 
+import hexlet.code.Engine;
+
 import java.util.Random;
-import java.util.Scanner;
 
 public class GCDGame {
-    private static final Random RANDOMIZER = new Random();
-    private static int val1;
-    private static int val2;
-    private static final Scanner SC = new Scanner(System.in);
-    private static final int[] ARRAY = new int[1];
-    private static  final int VALUES_BOUND = 100;
+    private static String description = "Find the greatest common divisor of given numbers.";
 
-    public static int play(String gamerName) {
-
-        val1 = RANDOMIZER.nextInt(VALUES_BOUND) + 1;
-        val2 = RANDOMIZER.nextInt(VALUES_BOUND) + 1;
-        System.out.printf("Question: %s %s\n", val1, val2);
-        int correctResult = getGCD(val1, val2);
-        System.out.print("Your answer: ");
-        String userAnswer = SC.nextLine();
-        boolean correctAnswer = Integer.parseInt(userAnswer) == correctResult;
-        if (correctAnswer) {
-            System.out.println("Correct!");
-            return 1;
-        } else {
-            System.out.printf("'%s' is wrong answer ;(. Correct answer was '%s'.\n"
-                    + "Let's try again, %s!\n", userAnswer, correctResult, gamerName);
-            return 0;
+    public static void run() {
+        Random randomizer = new Random();
+        final int valuesBound = 100;
+        int val1;
+        int val2;
+        final int loops = 3;
+        System.out.println(description);
+        for (int i = 0; i < loops; i++) {
+            val1 = randomizer.nextInt(valuesBound) + 1;
+            val2 = randomizer.nextInt(valuesBound) + 1;
+            String task = String.format("%s %s", val1, val2);
+            Engine.setTask(task);
+            Engine.setGameAnswer(String.valueOf(getGCD(val1, val2)));
+            Engine.makeDecision();
         }
+
     }
 
     private static int getGCD(int x, int y) {
+        int[] array = new int[1];
         if ((x > y) && (x % y == 0)) {
             return y;
         } else if ((y > x) & (y % x == 0)) {
@@ -40,17 +36,17 @@ public class GCDGame {
         } else if (x > y) {
             for (int i = 1; i < x; i++) {
                 if (x % i == 0 && y % i == 0) {
-                    ARRAY[0] = i;
+                    array[0] = i;
                 }
             }
-            return ARRAY[0];
+            return array[0];
         } else {
             for (int i = 1; i < x; i++) {
                 if (x % i == 0 && y % i == 0) {
-                    ARRAY[0] = i;
+                    array[0] = i;
                 }
             }
-            return ARRAY[0];
+            return array[0];
         }
 
     }

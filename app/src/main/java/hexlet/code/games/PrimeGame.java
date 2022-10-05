@@ -1,32 +1,30 @@
 package hexlet.code.games;
 
+import hexlet.code.Engine;
+
 import java.util.Random;
-import java.util.Scanner;
 
 public class PrimeGame {
-    private static final int BOUND = 30;
-    private static final Scanner SC = new Scanner(System.in);
 
-    public static int play(String gamerName) {
-        int random = new Random().nextInt(BOUND) + 1;
-        System.out.println("Question: " + random);
-        System.out.print("Your answer: ");
+    private static String description = "Answer 'yes' if given number is prime. Otherwise answer 'no'.";
 
-        boolean isPrime = isPrime(random);
-        String userAnswer = SC.nextLine();
-        String correctAnswer = isPrime ? "yes" : "no";
-        if (correctAnswer.equalsIgnoreCase(userAnswer)) {
-            System.out.println("Correct!");
-            return 1;
-        } else {
-            System.out.printf("'%s' is wrong answer ;(. Correct answer was '%s'.\n"
-                    + "Let's try again, %s!\n", userAnswer, correctAnswer, gamerName);
-            return 0;
+    public static void run() {
+        final int bound = 30;
+        System.out.println(description);
+        final int loops = 3;
+        for (int i = 0; i < loops; i++) {
+            int random = new Random().nextInt(bound) + 1;
+            String task = String.valueOf(random);
+            Engine.setTask(task);
+            boolean isPrime = isPrime(random);
+            String correctAnswer = isPrime ? "yes" : "no";
+            Engine.setGameAnswer(correctAnswer);
+            Engine.makeDecision();
         }
+
     }
 
     private static boolean isPrime(int candidate) {
-
         if (candidate == 1) {
             return false;
         }

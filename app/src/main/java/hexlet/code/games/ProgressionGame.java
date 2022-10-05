@@ -1,51 +1,42 @@
 package hexlet.code.games;
 
+import hexlet.code.Engine;
+
 import java.util.Random;
-import java.util.Scanner;
 
 public class ProgressionGame {
+    private static String skippedElement;
+    private static String description = "What number is missing in the progression?";
 
-    private static final Random RANDOMIZER = new Random();
-    private static final int PROGRESSION_ARRAY_LENGTH = 10;
-    private static final String[] PROGRESSION_ARRAY = new String[PROGRESSION_ARRAY_LENGTH];
-    private static int skippedIndex;
-    private static String correctResult;
-    private static final Scanner SC = new Scanner(System.in);
-    private static final int FIRST_ELEMENT_BOUND = 20;
-    private static final int STEP_BOUND = 5;
-
-    public static int play(String gamerName) {
-        System.out.println("Question: " + generateProgression());
-        System.out.print("Your answer: ");
-        String userAnswer = SC.nextLine();
-        boolean correctAnswer = userAnswer.equals(correctResult);
-        if (correctAnswer) {
-            System.out.println("Correct!");
-            return 1;
-
-        } else {
-            System.out.printf("'%s' is wrong answer ;(. Correct answer was '%s'.\n"
-                    + "Let's try again, %s!\n", userAnswer, correctResult, gamerName);
-            return 0;
+    public static void run() {
+        final int loops = 3;
+        System.out.println(description);
+        for (int i = 0; i < loops; i++) {
+            String task = generateProgression();
+            Engine.setTask(task);
+            Engine.setGameAnswer(skippedElement);
+            Engine.makeDecision();
         }
     }
 
     private static String generateProgression() {
-
-        int firstElem = RANDOMIZER.nextInt(FIRST_ELEMENT_BOUND) + 1;
-
-        int step = RANDOMIZER.nextInt(STEP_BOUND) + 1;
-
-        PROGRESSION_ARRAY[0] = String.valueOf(firstElem);
-        for (int i = 0; i < PROGRESSION_ARRAY.length - 1; i++) {
-            int nextElement = Integer.parseInt(PROGRESSION_ARRAY[i]) + step;
-            PROGRESSION_ARRAY[i + 1] = String.valueOf(nextElement);
+        Random randomizer = new Random();
+        final int progressionArrayLength = 10;
+        String[] progressionArray = new String[progressionArrayLength];
+        final int firstElementBound = 20;
+        final int stepBound = 5;
+        int skippedIndex;
+        int firstElem = randomizer.nextInt(firstElementBound) + 1;
+        int step = randomizer.nextInt(stepBound) + 1;
+        progressionArray[0] = String.valueOf(firstElem);
+        for (int i = 0; i < progressionArray.length - 1; i++) {
+            int nextElement = Integer.parseInt(progressionArray[i]) + step;
+            progressionArray[i + 1] = String.valueOf(nextElement);
         }
-        skippedIndex = RANDOMIZER.nextInt(PROGRESSION_ARRAY.length);
-        correctResult = PROGRESSION_ARRAY[skippedIndex];
-        PROGRESSION_ARRAY[skippedIndex] = "..";
-        System.out.println();
-        return String.join(" ", PROGRESSION_ARRAY);
+        skippedIndex = randomizer.nextInt(progressionArray.length);
+        skippedElement = progressionArray[skippedIndex];
+        progressionArray[skippedIndex] = "..";
+        return String.join(" ", progressionArray);
 
     }
 

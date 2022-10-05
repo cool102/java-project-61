@@ -1,31 +1,25 @@
 package hexlet.code.games;
 
+import hexlet.code.Engine;
+
 import java.util.Random;
-import java.util.Scanner;
 
 public class EvenGame {
-    private static final int BOUND = 20;
-    private static final Scanner SC = new Scanner(System.in);
+    private static String description = "Answer 'yes' if number even otherwise answer 'no'.";
 
-    public static int play(String gamerName) {
-
-        int random = new Random().nextInt(BOUND) + 1;
-        System.out.println("Question: " + random);
-        System.out.print("Your answer: ");
-        boolean randomIsEven = (random % 2 == 0);
-        String userAnswer = SC.nextLine();
-        String correctAnswer = randomIsEven ? "yes" : "no";
-        if (correctAnswer.equalsIgnoreCase(userAnswer)) {
-            System.out.println("Correct!");
-            return 1;
-        } else {
-            System.out.printf("'%s' is wrong answer ;(. Correct answer was '%s'.\n"
-                    + "Let's try again, %s!\n", userAnswer, correctAnswer, gamerName);
-            return 0;
+    public static void run() {
+        final int bound = 20;
+        System.out.println(description);
+        final int loops = 3;
+        for (int i = 0; i < loops; i++) {
+            String task = String.valueOf(new Random().nextInt(bound) + 1);
+            Engine.setTask(task);
+            boolean randomIsEven = (Integer.parseInt(task) % 2 == 0);
+            String correctAnswer = randomIsEven ? "yes" : "no";
+            Engine.setGameAnswer(correctAnswer);
+            Engine.makeDecision();
         }
 
-
     }
-
 
 }

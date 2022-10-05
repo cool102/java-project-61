@@ -1,47 +1,35 @@
 package hexlet.code.games;
 
+import hexlet.code.Engine;
+
 import java.util.Random;
-import java.util.Scanner;
 
 public class CalcGame {
+    private static String description = "What is the result of the expression?";
 
-    private static final Random RANDOMIZER = new Random();
-    private static final String[] OPERATIONS = {"+", "-", "*"};
-    private static int val1;
-    private static int val2;
-    private static String operation;
-    private static String expression;
-    private static final Scanner SC = new Scanner(System.in);
-    private static final int VALUES_BOUND = 10;
-    private static final int OPERATIONS_BOUND = 3;
+    public static void run() {
+        Random randomizer = new Random();
+        String[] operations = {"+", "-", "*"};
+        final int valuesBound = 10;
+        int operationsBound = operations.length;
+        int val1;
+        int val2;
+        String operationType;
+        final int loops = 3;
 
-    public static int play(String gamerName) {
-
-        val1 = RANDOMIZER.nextInt(VALUES_BOUND) + 1;
-        val2 = RANDOMIZER.nextInt(VALUES_BOUND) + 1;
-
-        operation = OPERATIONS[RANDOMIZER.nextInt(OPERATIONS_BOUND)];
-        expression = String.format("%s %s %s", val1, operation, val2);
-        System.out.println("Question: " + expression);
-        int correctResult = getOperationResult(operation);
-        System.out.print("Your answer: ");
-        String userAnswer = SC.nextLine();
-        boolean correctAnswer = Integer.parseInt(userAnswer) == correctResult;
-
-
-        if (correctAnswer) {
-            System.out.println("Correct!");
-            return 1;
-
-        } else {
-            System.out.printf("'%s' is wrong answer ;(. Correct answer was '%s'.\n"
-                    + "Let's try again, %s!\n", userAnswer, correctResult, gamerName);
-            return 0;
+        System.out.println(description);
+        for (int i = 0; i < loops; i++) {
+            val1 = randomizer.nextInt(valuesBound) + 1;
+            val2 = randomizer.nextInt(valuesBound) + 1;
+            operationType = operations[randomizer.nextInt(operationsBound)];
+            String task = String.format("%s %s %s", val1, operationType, val2);
+            Engine.setTask(task);
+            Engine.setGameAnswer(String.valueOf(getOperationResult(operationType, val1, val2)));
+            Engine.makeDecision();
         }
     }
 
-
-    private static int getOperationResult(String operationType) {
+    private static int getOperationResult(String operationType, int val1, int val2) {
         switch (operationType) {
             case "+":
                 return val1 + val2;

@@ -1,87 +1,62 @@
 package hexlet.code;
 
-import hexlet.code.games.CalcGame;
-import hexlet.code.games.EvenGame;
-import hexlet.code.games.GCDGame;
-import hexlet.code.games.PrimeGame;
-import hexlet.code.games.ProgressionGame;
-
 import java.util.Scanner;
 
 public class Engine {
-    private static final int GAME_STOP_ANSWERS = 3;
+    public static final int ROUND = 3;
     private static String gamerName = "";
-    private static int rightAnswers = 0;
-    private static boolean isGameOver = false;
+    private static String task;
+    private static int rightAnswersCounter = 0;
+    private static Scanner scanner = new Scanner(System.in);
+
+    private static String userAnswer;
+    private static String gameAnswer;
 
 
-    public static void start(String choice) {
-        gamerName = askName();
-        printQuestion(choice);
-        do {
-            int result = play(choice, gamerName);
-            isGameOver = result == 0;
-            if (!isGameOver) {
-                rightAnswers++;
-            }
-        } while (!isGameOver && rightAnswers != GAME_STOP_ANSWERS);
-        if (rightAnswers == GAME_STOP_ANSWERS) {
-            System.out.printf("Congratulations, %s!\n", gamerName);
-        }
-
+    public static void printTask() {
+        System.out.println("Question: " + task);
     }
 
-    public static int play(String choice, String name) {
-        switch (choice) {
-            case "2":
-                return EvenGame.play(name);
-            case "3":
-                return CalcGame.play(name);
-            case "4":
-                return GCDGame.play(name);
-            case "5":
-                return ProgressionGame.play(name);
-            case "6":
-                return PrimeGame.play(name);
-            default:
-                throw new RuntimeException("Вы выбрали несуществующее меню");
-        }
+    public static void setTask(String taskName) {
+        Engine.task = taskName;
     }
 
-    public static void printQuestion(String gameNumber) {
-        switch (gameNumber) {
-            case "0":
-            case "1":
+    public static void setUserAnswer(String answer) {
+        Engine.userAnswer = answer;
+    }
+
+    public static void setGameAnswer(String trueAnswer) {
+        Engine.gameAnswer = trueAnswer;
+    }
+
+    public static void setGamerName(String name) {
+        Engine.gamerName = name;
+    }
+
+    public static void getUserAnswer() {
+        System.out.print("Your answer: ");
+        userAnswer = scanner.nextLine();
+    }
+
+    public static void makeDecision() {
+        while (rightAnswersCounter < ROUND) {
+            printTask();
+            getUserAnswer();
+            if (gameAnswer.equals(userAnswer)) {
+                rightAnswersCounter++;
+                System.out.println("Correct!");
+                if (rightAnswersCounter == ROUND) {
+                    break;
+                } else {
+                    return;
+                }
+            } else {
+                System.out.printf("'%s' is wrong answer ;(. Correct answer was '%s'.\n"
+                        + "Let's try again, %s!\n", userAnswer, gameAnswer, gamerName);
                 System.exit(0);
-            case "2":
-                System.out.println("Answer 'yes' if number even otherwise answer 'no'.");
-                break;
-            case "3":
-                System.out.println("What is the result of the expression?");
-                break;
-            case "4":
-                System.out.println("Find the greatest common divisor of given numbers.");
-                break;
-            case "5":
-                System.out.println("What number is missing in the progression?");
-                break;
-            case "6":
-                System.out.println("Answer 'yes' if given number is prime. Otherwise answer 'no'.");
-                break;
-            default:
-                throw new RuntimeException("Выбран несуществующий номер игры");
+            }
         }
+        System.out.printf("Congratulations, %s!\n", gamerName);
     }
-
-    public static String askName() {
-        System.out.println();
-        System.out.println("Welcome to the Brain Games!");
-        System.out.print("May I have your name? ");
-        Scanner sc = new Scanner(System.in);
-        String name = sc.nextLine();
-        System.out.print("Hello, " + name + "!\n");
-        return name;
-    }
-
 
 }
