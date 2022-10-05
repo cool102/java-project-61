@@ -1,10 +1,6 @@
 package hexlet.code;
 
-import hexlet.code.games.CalcGame;
-import hexlet.code.games.EvenGame;
-import hexlet.code.games.GCDGame;
-import hexlet.code.games.PrimeGame;
-import hexlet.code.games.ProgressionGame;
+import hexlet.code.games.*;
 
 import java.util.Scanner;
 
@@ -29,6 +25,7 @@ public class App {
     public static void run(String choice) {
         switch (choice) {
             case "1":
+            case "0":
                 System.exit(0);
             case "2":
                 EvenGame.run();
