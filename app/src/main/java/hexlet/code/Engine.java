@@ -3,49 +3,32 @@ package hexlet.code;
 import java.util.Scanner;
 
 public class Engine {
-    public static final int ROUND = 3;
     private static String gamerName = "";
-    private static String task;
     private static int rightAnswersCounter = 0;
     private static Scanner scanner = new Scanner(System.in);
 
-    private static String userAnswer;
-    private static String gameAnswer;
-
-
-    public static void printTask() {
+    public static void printTask(String task) {
         System.out.println("Question: " + task);
     }
 
-    public static void setTask(String taskName) {
-        Engine.task = taskName;
-    }
-
-    public static void setUserAnswer(String answer) {
-        Engine.userAnswer = answer;
-    }
-
-    public static void setGameAnswer(String trueAnswer) {
-        Engine.gameAnswer = trueAnswer;
-    }
-
     public static void setGamerName(String name) {
-        Engine.gamerName = name;
+        gamerName = name;
     }
 
-    public static void getUserAnswer() {
+    public static String getUserAnswer() {
         System.out.print("Your answer: ");
-        userAnswer = scanner.nextLine();
+        return scanner.nextLine();
     }
 
-    public static void makeDecision() {
-        while (rightAnswersCounter < ROUND) {
-            printTask();
-            getUserAnswer();
+    public static void runRound(String task, String gameAnswer) {
+        final int round = 3;
+        while (rightAnswersCounter < round) {
+            printTask(task);
+            String userAnswer = getUserAnswer();
             if (gameAnswer.equals(userAnswer)) {
                 rightAnswersCounter++;
                 System.out.println("Correct!");
-                if (rightAnswersCounter == ROUND) {
+                if (rightAnswersCounter == round) {
                     break;
                 } else {
                     return;

@@ -23,9 +23,8 @@ public class CalcGame {
             val2 = randomizer.nextInt(valuesBound) + 1;
             operationType = operations[randomizer.nextInt(operationsBound)];
             String task = String.format("%s %s %s", val1, operationType, val2);
-            Engine.setTask(task);
-            Engine.setGameAnswer(String.valueOf(getOperationResult(operationType, val1, val2)));
-            Engine.makeDecision();
+            String correctAnswer = String.valueOf(getOperationResult(operationType, val1, val2));
+            Engine.runRound(task, correctAnswer);
         }
     }
 

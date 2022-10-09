@@ -12,14 +12,19 @@ public class EvenGame {
         System.out.println(description);
         final int loops = 3;
         for (int i = 0; i < loops; i++) {
-            String task = String.valueOf(new Random().nextInt(bound) + 1);
-            Engine.setTask(task);
-            boolean randomIsEven = (Integer.parseInt(task) % 2 == 0);
+            String task = generateTask(bound);
+            boolean randomIsEven = isRandomIsEven(task);
             String correctAnswer = randomIsEven ? "yes" : "no";
-            Engine.setGameAnswer(correctAnswer);
-            Engine.makeDecision();
+            Engine.runRound(task, correctAnswer);
         }
+    }
 
+    private static String generateTask(int bound) {
+        return String.valueOf(new Random().nextInt(bound) + 1);
+    }
+
+    private static boolean isRandomIsEven(String task) {
+        return Integer.parseInt(task) % 2 == 0;
     }
 
 }

@@ -7,25 +7,25 @@ import java.util.Random;
 public class ProgressionGame {
     private static String skippedElement;
     private static String description = "What number is missing in the progression?";
+    private static int skippedIndex;
 
     public static void run() {
         final int loops = 3;
         System.out.println(description);
         for (int i = 0; i < loops; i++) {
-            String task = generateProgression();
-            Engine.setTask(task);
-            Engine.setGameAnswer(skippedElement);
-            Engine.makeDecision();
+            String[] generatedProgression = generateProgression();
+            String correctAnswer = getCorrectAnswer(generatedProgression);
+            String task = getTask(generatedProgression, skippedIndex);
+            Engine.runRound(task, correctAnswer);
         }
     }
 
-    private static String generateProgression() {
+    private static String[] generateProgression() {
         Random randomizer = new Random();
         final int progressionArrayLength = 10;
         String[] progressionArray = new String[progressionArrayLength];
         final int firstElementBound = 20;
         final int stepBound = 5;
-        int skippedIndex;
         int firstElem = randomizer.nextInt(firstElementBound) + 1;
         int step = randomizer.nextInt(stepBound) + 1;
         progressionArray[0] = String.valueOf(firstElem);
@@ -33,11 +33,20 @@ public class ProgressionGame {
             int nextElement = Integer.parseInt(progressionArray[i]) + step;
             progressionArray[i + 1] = String.valueOf(nextElement);
         }
-        skippedIndex = randomizer.nextInt(progressionArray.length);
-        skippedElement = progressionArray[skippedIndex];
-        progressionArray[skippedIndex] = "..";
+        return progressionArray;
+    }
+
+    private static String getTask(String[] progressionArray, int skipIndex) {
+        Random randomizer = new Random();
+        progressionArray[skipIndex] = "..";
         return String.join(" ", progressionArray);
 
+    }
+
+    private static String getCorrectAnswer(String[] arr) {
+        Random randomizer = new Random();
+        skippedIndex = randomizer.nextInt(arr.length);
+        return arr[skippedIndex];
     }
 
 }

@@ -22,14 +22,14 @@ public class App {
         System.out.println("0 - Exit");
         System.out.print("Your choice: ");
         String choice = sc.nextLine();
-        Cli.greeting();
         run(choice);
     }
 
     public static void run(String choice) {
+        Cli.greeting();
         switch (choice) {
-            case "1":
             case "0":
+            case "1":
                 System.exit(0);
             case "2":
                 EvenGame.run();
@@ -45,6 +45,7 @@ public class App {
                 break;
             case "6":
                 PrimeGame.run();
+                break;
             default:
                 throw new RuntimeException("Вы выбрали несуществующее меню");
         }

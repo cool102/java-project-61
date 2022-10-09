@@ -18,11 +18,9 @@ public class GCDGame {
             val1 = randomizer.nextInt(valuesBound) + 1;
             val2 = randomizer.nextInt(valuesBound) + 1;
             String task = String.format("%s %s", val1, val2);
-            Engine.setTask(task);
-            Engine.setGameAnswer(String.valueOf(getGCD(val1, val2)));
-            Engine.makeDecision();
+            String correctAnswer = String.valueOf(getGCD(val1, val2));
+            Engine.runRound(task, correctAnswer);
         }
-
     }
 
     private static int getGCD(int x, int y) {
