@@ -5,19 +5,21 @@ import hexlet.code.Engine;
 import java.util.Random;
 
 public class ProgressionGame {
+    private static final String DESCRIPTION = "What number is missing in the progression?";
     private static String skippedElement;
-    private static String description = "What number is missing in the progression?";
     private static int skippedIndex;
 
     public static void run() {
         final int loops = 3;
-        System.out.println(description);
+        String[][] roundsData = new String[Engine.ROUNDS][2];
         for (int i = 0; i < loops; i++) {
             String[] generatedProgression = generateProgression();
             String correctAnswer = getCorrectAnswer(generatedProgression);
             String task = getTask(generatedProgression, skippedIndex);
-            Engine.runRound(task, correctAnswer);
+            roundsData[i][0] = task;
+            roundsData[i][1] = correctAnswer;
         }
+        Engine.runGame(DESCRIPTION, roundsData);
     }
 
     private static String[] generateProgression() {

@@ -5,18 +5,19 @@ import hexlet.code.Engine;
 import java.util.Random;
 
 public class EvenGame {
-    private static String description = "Answer 'yes' if the number is even, otherwise answer 'no'.";
+    private static final String DESCRIPTION = "Answer 'yes' if the number is even, otherwise answer 'no'.";
 
     public static void run() {
         final int bound = 20;
-        System.out.println(description);
-        final int loops = 3;
-        for (int i = 0; i < loops; i++) {
+        String[][] roundsData = new String[Engine.ROUNDS][2];
+        for (int i = 0; i < Engine.ROUNDS; i++) {
             String task = generateTask(bound);
             boolean randomIsEven = isRandomIsEven(task);
             String correctAnswer = randomIsEven ? "yes" : "no";
-            Engine.runRound(task, correctAnswer);
+            roundsData[i][0] = task;
+            roundsData[i][1] = correctAnswer;
         }
+        Engine.runGame(DESCRIPTION, roundsData);
     }
 
     private static String generateTask(int bound) {

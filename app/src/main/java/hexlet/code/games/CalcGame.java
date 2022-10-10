@@ -5,27 +5,24 @@ import hexlet.code.Engine;
 import java.util.Random;
 
 public class CalcGame {
-    private static String description = "What is the result of the expression?";
+    private static final String DESCRIPTION = "What is the result of the expression?";
+    private static final String[] OPERATIONS = {"+", "-", "*"};
+    private static final int VALUES_BOUND = 10;
 
     public static void run() {
         Random randomizer = new Random();
-        String[] operations = {"+", "-", "*"};
-        final int valuesBound = 10;
-        int operationsBound = operations.length;
-        int val1;
-        int val2;
-        String operationType;
-        final int loops = 3;
-
-        System.out.println(description);
-        for (int i = 0; i < loops; i++) {
-            val1 = randomizer.nextInt(valuesBound) + 1;
-            val2 = randomizer.nextInt(valuesBound) + 1;
-            operationType = operations[randomizer.nextInt(operationsBound)];
+        int operationsBound = OPERATIONS.length;
+        String[][] roundsData = new String[Engine.ROUNDS][2];
+        for (int i = 0; i < Engine.ROUNDS; i++) {
+            int val1 = randomizer.nextInt(VALUES_BOUND) + 1;
+            int val2 = randomizer.nextInt(VALUES_BOUND) + 1;
+            String operationType = OPERATIONS[randomizer.nextInt(operationsBound)];
             String task = String.format("%s %s %s", val1, operationType, val2);
             String correctAnswer = String.valueOf(getOperationResult(operationType, val1, val2));
-            Engine.runRound(task, correctAnswer);
+            roundsData[i][0] = task;
+            roundsData[i][1] = correctAnswer;
         }
+        Engine.runGame(DESCRIPTION, roundsData);
     }
 
     private static int getOperationResult(String operationType, int val1, int val2) {

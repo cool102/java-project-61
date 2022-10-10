@@ -9,7 +9,6 @@ class Cli {
         System.out.println("Welcome to the Brain Games!");
         System.out.print("May I have your name? ");
         String name = sc.nextLine();
-        Engine.setGamerName(name);
         System.out.println("Hello, " + name + "!");
     }
 }
